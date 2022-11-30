@@ -89,6 +89,8 @@ function App() {
     setWrongLetters((actualWrongLetters) =>[
       ...actualWrongLetters, normalizedLetter
     ])
+    setGuesses((actualGuesses)=> actualGuesses-1
+    )
   }
 
   console.log(guessedLetters)
