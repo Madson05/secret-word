@@ -131,7 +131,7 @@ function App() {
 
       {gameStage === "game" && <Game verifyLetter = {verifyLetter} pickedWord = {pickedWord} pickedCategory = {pickedCategory} letters = {letters} guessedLetters = {guessedLetters} wrongLetters = {wrongLetters} guesses = {guesses} score = {score}/>}
 
-      {gameStage === "end" && <GameOver retry = {retry}/>}
+      {gameStage === "end" && <GameOver retry = {retry} score = {score}/>}
 
     </div>
   );
