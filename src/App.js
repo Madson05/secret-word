@@ -33,41 +33,45 @@ function App() {
   const [guesses, setGuesses] = useState(3);
   const [score, setScore] = useState(0);
 
-  const pickWordAndCategory = () => {
-
+  const pickWordAndCategory = useCallback(() => {
     // pick a random category
-    const categories = Object.keys(words)
-    const category = categories[Math.floor(Math.random() * Object.keys(categories).length)]
-    console.log(category)
+    const categories = Object.keys(words);
+    const category =
+      categories[Math.floor(Math.random() * Object.keys(categories).length)];
 
     // pick a random word
-    const word = words[category][Math.floor(Math.random() * words[category].length)]
+    const word =
+      words[category][Math.floor(Math.random() * words[category].length)];
 
-    console.log(word)
+    
 
-    return{word, category}
-  }
+    return { category, word };
+  }, [words]);
+
  
   //starts the secret word
-  const startGame = ()=> {
+  const startGame = useCallback(()=> {
+
+    // clear all letter
+    clearLettersStates()
+
     // pick work and pick category
-    const {word, category} = pickWordAndCategory();
+    const { category, word } = pickWordAndCategory();
 
-    console.log(word, category)
-
-    // create on array of letters
-
-    let wordLetters = word.split("")
     
-    wordLetters = wordLetters.map((l)=> l.toLowerCase())
 
-    // fill states
-    setPickedWord(word)
-    setPickedCategory(category)
-    setLetters(wordLetters)
+    let wordLetters = word.split("");
 
-    setGameStage(stages[1].name)
-  }
+    wordLetters = wordLetters.map((l) => l.toLowerCase());
+
+    // console.log(category, word);
+
+    setPickedCategory(category);
+    setPickedWord(word);
+    setLetters(wordLetters);
+
+    setGameStage(stages[1].name);
+  }, [pickWordAndCategory]);
 
 
   //process the letter input 
@@ -112,7 +116,7 @@ function App() {
   }
 
   
-  
+  // check if guesses ended
 
   useEffect(() => {
     if (guesses === 0) {
@@ -123,6 +127,17 @@ function App() {
     }
   }, [guesses]);
 
+    // check win condition
+
+    useEffect(()=>{
+      const uniqueLetters = [...new Set(letters)]
+
+      if(guessedLetters.length === uniqueLetters.length){
+        setScore((actualScore)=> actualScore+=100)
+        startGame()
+      }
+
+    }, [guessedLetters, letters, startGame])
   
 
   return (
