@@ -92,17 +92,37 @@ function App() {
     setGuesses((actualGuesses)=> actualGuesses-1
     )
   }
+  
+  };
 
-  console.log(guessedLetters)
-  console.log(wrongLetters)
-
+  
     
-  }
+  
 
   //reload the game
-  const retry = ()=> setGameStage(stages[0].name)
+  const retry = ()=> {
+    setScore(0)
+    setGuesses(3)
+    setGameStage(stages[0].name)
+  }
 
-    
+  const clearLettersStates = () =>{
+    setGuessedLetters([])
+    setWrongLetters([])
+  }
+
+  
+  
+
+  useEffect(() => {
+    if (guesses === 0) {
+      // game over and reset all states
+      clearLettersStates();
+
+      setGameStage(stages[2].name);
+    }
+  }, [guesses]);
+
   
 
   return (
