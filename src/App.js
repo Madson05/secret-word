@@ -132,7 +132,7 @@ function App() {
     useEffect(()=>{
       const uniqueLetters = [...new Set(letters)]
 
-      if(guessedLetters.length === uniqueLetters.length){
+      if(guessedLetters.length === uniqueLetters.length && guessedLetters.length>0){
         setScore((actualScore)=> actualScore+=100)
         startGame()
       }
