@@ -5,3 +5,13 @@
   text-align: center;
 }
 
+footer {
+  position: absolute;
+  bottom: 0;
+  background-color: rgb(28, 28, 145);
+  color: #FFF;
+  width: 100%;
+  height: 100px;    
+  text-align: center;
+  line-height: 100px;
+}

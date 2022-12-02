@@ -58,6 +58,7 @@ function App() {
     // pick work and pick category
     const { category, word } = pickWordAndCategory();
 
+    setGuesses(3);
     
 
     let wordLetters = word.split("");
@@ -146,7 +147,9 @@ function App() {
 
       {gameStage === "game" && <Game verifyLetter = {verifyLetter} pickedWord = {pickedWord} pickedCategory = {pickedCategory} letters = {letters} guessedLetters = {guessedLetters} wrongLetters = {wrongLetters} guesses = {guesses} score = {score}/>}
 
-      {gameStage === "end" && <GameOver retry = {retry} score = {score}/>}
+      {gameStage === "end" && <GameOver retry = {retry} score = {score} word = {pickedWord}/>}
+
+      <footer>Este site foi criado em React por Madson Silva</footer>
 
     </div>
   );
